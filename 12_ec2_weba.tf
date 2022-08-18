@@ -1,7 +1,7 @@
 
 resource "aws_instance" "hychai_ec2_WEBA" {
-  ami                         = "ami-0e1d09d8b7c751816"
-  instance_type               = "t2.micro"
+  ami                         = "ami-01711d925a1e4cc3a"
+  instance_type               = "t2.small"
   key_name                    = "heeyun"
   vpc_security_group_ids      = [aws_security_group.hychai_sec.id]
   availability_zone           = "ap-northeast-2a"

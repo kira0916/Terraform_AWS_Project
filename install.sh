@@ -25,28 +25,16 @@ sed -i '59 i JkWorkersFile /etc/httpd/conf/workers.properties' /etc/httpd/conf/h
 sed -i '60 i JkLogFile /var/log/httpd/mod_jk.log' /etc/httpd/conf/httpd.conf
 sed -i '61 i JkLogLevel info' /etc/httpd/conf/httpd.conf
 sed -i '62 i JkLogStampFormat "[%a %b $d %H:%M:%S %Y]"' /etc/httpd/conf/httpd.conf
-sed -i '63 i JkMount /*.* balancer' /etc/httpd/conf/httpd.conf
+sed -i '63 i JkMount /*.* worker1' /etc/httpd/conf/httpd.conf
 sed -i '64 i SetEnvIf Request_URI "health\.+html$" html_filter_flag=1' /etc/httpd/conf/httpd.conf
 sed -i '65 i SetEnvIf html_filter_flag 1 no-jk' /etc/httpd/conf/httpd.conf
 sed -i '66 i </IfModule>' /etc/httpd/conf/httpd.conf
 cat >> /etc/httpd/conf/workers.properties << EOF
 
-worker.list=balancer
-worker.balancer.type=lb
-worker.balancer.balance_workers=worker1,worker2
-worker.balancer.sticky_session=True
-
 worker.list=worker1
 worker.worker1.type=ajp13
 worker.worker1.host=10.0.2.183
 worker.worker1.port=8009
-worker.worker1.lbfactor=1
-
-worker.list=worker2
-worker.worker2.type=ajp13
-worker.worker2.host=10.0.2.183
-worker.worker2.port=8010
-worker.worker2.lbfactor=1
 
 EOF
 

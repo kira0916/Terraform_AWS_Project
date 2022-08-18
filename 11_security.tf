@@ -25,6 +25,17 @@ resource "aws_security_group" "hychai_sec" {
       security_groups  = null
       self             = null
     },
+        {
+      description      = "Docker_Swarm"
+      from_port        = 2377
+      to_port          = 2377
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+      prefix_list_ids  = null
+      security_groups  = null
+      self             = null
+    },
     {
       description      = "HTTP"
       from_port        = 80

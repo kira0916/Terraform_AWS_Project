@@ -37,6 +37,15 @@ RUN sed -i '4733 i <res-type>javax.sql.DataSource</res-type>' /usr/local/tomcat/
 RUN sed -i '4734 i <res-auth>Container</res-auth>' /usr/local/tomcat/conf/web.xml
 RUN sed -i '4735 i </resource-ref>' /usr/local/tomcat/conf/web.xml
 
+RUN sed -i '59 i  export CATALINA_PID=/usr/local/tomcat/bin/catalina.pid' /usr/local/tomcat/bin/shutdown.sh
+RUN sed -i '60 i  for line in \$CATALINA_PID' /usr/local/tomcat/bin/shutdown.sh
+RUN sed -i '61 i  do' /usr/local/tomcat/bin/shutdown.sh
+RUN sed -i '62 i          echo\"$CATALINA_PID"' /usr/local/tomcat/bin/shutdown.sh
+RUN sed -i '63 i  done' /usr/local/tomcat/bin/shutdown.sh
+RUN sed -i '64 i  echo "kill -9 \$line"' /usr/local/tomcat/bin/shutdown.sh
+
+RUN sed -i '65 i  export CATALINA_PID=/usr/local/tomcat/bin/catalina.pid' /usr/local/tomcat/bin/startup.sh
+
 RUN sed -i '122 i <Connector protocol="AJP/1.3"' /usr/local/tomcat/conf/server.xml
 RUN sed -i '123 i address="0.0.0.0"' /usr/local/tomcat/conf/server.xml
 RUN sed -i '124 i secretRequired="false"' /usr/local/tomcat/conf/server.xml
@@ -80,7 +89,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/bin:/bin:/sbin
 export JAVA_HOME PATH CLASSPATH CATALINA_HOME\n\
 '> /etc/profile
 
-EXPOSE 8080
 CMD ["/usr/local/tomcat/bin/catalina.sh","run"]
 
 #finish
@@ -118,6 +126,15 @@ RUN sed -i '4732 i <res-ref-name>jdbc/db</res-ref-name>' /usr/local/tomcat/conf/
 RUN sed -i '4733 i <res-type>javax.sql.DataSource</res-type>' /usr/local/tomcat/conf/web.xml
 RUN sed -i '4734 i <res-auth>Container</res-auth>' /usr/local/tomcat/conf/web.xml
 RUN sed -i '4735 i </resource-ref>' /usr/local/tomcat/conf/web.xml
+
+RUN sed -i '59 i  export CATALINA_PID=/usr/local/tomcat/bin/catalina.pid' /usr/local/tomcat/bin/shutdown.sh
+RUN sed -i '60 i  for line in \$CATALINA_PID' /usr/local/tomcat/bin/shutdown.sh
+RUN sed -i '61 i  do' /usr/local/tomcat/bin/shutdown.sh
+RUN sed -i '62 i          echo"\$CATALINA_PID"' /usr/local/tomcat/bin/shutdown.sh
+RUN sed -i '63 i  done' /usr/local/tomcat/bin/shutdown.sh
+RUN sed -i '64 i  echo "kill -9 \$line"' /usr/local/tomcat/bin/shutdown.sh
+
+RUN sed -i '65 i  export CATALINA_PID=/usr/local/tomcat/bin/catalina.pid' /usr/local/tomcat/bin/startup.sh
 
 RUN sed -i '122 i <Connector protocol="AJP/1.3"' /usr/local/tomcat/conf/server.xml
 RUN sed -i '123 i address="0.0.0.0"' /usr/local/tomcat/conf/server.xml
@@ -161,7 +178,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/bin:/bin:/sbin
 export JAVA_HOME PATH CLASSPATH CATALINA_HOME\n\
 '> /etc/profile
 
-EXPOSE 8080
 CMD ["/usr/local/tomcat/bin/catalina.sh","run"]
 
 #finish
@@ -169,8 +185,3 @@ EOF
 
 docker build -t tom:2 .
 
-alias tomcat1="docker exec -it tomcat1 bash"
-alias tomcat2="docker exec -it tomcat2 bash"
-
-docker run -itd --name tomcat1 -p 8009:8009 tom:1 /bin/bash
-docker run -itd --name tomcat2 -p 8010:8010 tom:2 /bin/bash
