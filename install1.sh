@@ -19,5 +19,5 @@ git init
 git add *
 git commit -m "1"
 git branch -M main
-git push --set-upstream https://x1nyub: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@github.com/x1nyub/test1.git main
-docker pull heeyoonchai/tom:1
+git push --set-upstream https://@github.com/x1nyub/test6.git main
+docker pull heeyoonchai/tomcat:1

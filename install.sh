@@ -35,7 +35,7 @@ worker.list=worker1
 worker.worker1.type=ajp13
 worker.worker1.host=10.0.2.183
 worker.worker1.port=8009
-
+worker.worker1.lbfactor=1
 EOF
 
 systemctl enable httpd
