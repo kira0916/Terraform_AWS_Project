@@ -1,8 +1,8 @@
-resource "aws_lb_target_group" "hychai_nlbta" {
-  name     = "hychai-nlbta"
+resource "aws_lb_target_group" "company_nlbta" {
+  name     = "company-nlbta"
   port     = 8009
   protocol = "TCP"
-  vpc_id   = aws_vpc.hychai_vpc.id
+  vpc_id   = aws_vpc.company_vpc.id
   target_type = "instance"
 
 health_check {

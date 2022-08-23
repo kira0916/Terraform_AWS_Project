@@ -1,8 +1,8 @@
-resource "aws_lb_target_group" "hychai_albta" {
-  name     = "hychai-albta"
+resource "aws_lb_target_group" "company_albta" {
+  name     = "company-albta"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = aws_vpc.hychai_vpc.id
+  vpc_id   = aws_vpc.company_vpc.id
   target_type = "instance"
 
   stickiness {

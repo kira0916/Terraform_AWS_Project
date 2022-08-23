@@ -1,7 +1,7 @@
-resource "aws_security_group" "hychai_sec" {
-  name        = "hychai-sec"
+resource "aws_security_group" "company_sec" {
+  name        = "company-sec"
   description = "Allow 21,22,80,3306,icmp"
-  vpc_id      = aws_vpc.hychai_vpc.id
+  vpc_id      = aws_vpc.company_vpc.id
 
   ingress = [{
     description      = "Tomcat"

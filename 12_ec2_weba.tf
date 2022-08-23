@@ -1,10 +1,10 @@
-resource "aws_instance" "hychai_ec2_WEBA" {
+resource "aws_instance" "company_ec2_WEBA" {
   ami                         = "ami-01711d925a1e4cc3a"
   instance_type               = "t2.small"
   key_name                    = "heeyun"
-  vpc_security_group_ids      = [aws_security_group.hychai_sec.id]
+  vpc_security_group_ids      = [aws_security_group.company_sec.id]
   availability_zone           = "ap-northeast-2a"
-  subnet_id                   = aws_subnet.hychai_weba.id
+  subnet_id                   = aws_subnet.company_weba.id
   associate_public_ip_address = true
   user_data                   = <<-EOF
 #! /bin/bash
@@ -42,9 +42,9 @@ cat >> /etc/httpd/conf/workers.properties << EOF2
 
 worker.list=worker1
 worker.worker1.type=ajp13
-worker.worker1.host=${aws_lb.hychai_nlb.dns_name}
+worker.worker1.host=${aws_lb.company_n.dns_name}
 worker.worker1.port=8009
-
+worker.worker1.socket_timeout=10
 EOF2
 
 systemctl enable httpd
@@ -56,7 +56,4 @@ EOF
     }
 }
 
-output "public_ip" {
-  value = aws_instance.hychai_ec2_WEBA.public_ip
-}
 
