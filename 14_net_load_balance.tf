@@ -1,12 +1,12 @@
-resource "aws_lb" "company_n" {
+resource "aws_alb" "company_n" {
   name            = "company-n"
-  load_balancer_type = "network"
   internal        = true
   subnets         = [aws_subnet.company_wasa.id, aws_subnet.company_wasc.id]
+  security_groups = [aws_security_group.company_sec.id]
   tags = {
-    "Name" = "company-n"
+    "Name" = "company-a"
   }
 }
 output "dns_name_nlb" {
-  value = aws_lb.company_n.dns_name
+  value = aws_alb.company_n.dns_name
 }

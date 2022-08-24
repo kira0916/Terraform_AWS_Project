@@ -13,11 +13,11 @@ resource "aws_lb_target_group_attachment" "company_lbtatt" {
 resource "aws_lb_target_group_attachment" "company_nlbtaatt" {
   target_group_arn = aws_lb_target_group.company_nlbta.arn
   target_id        = aws_instance.company_ec2_WASA.id
-  port             = 8009
+  port             = 8080
 }
 
 resource "aws_lb_target_group_attachment" "company_nlbtatt" {
   target_group_arn = aws_lb_target_group.company_nlbta.arn
   target_id        = aws_instance.company_ec2_WASC.id
-  port             = 8009
+  port             = 8080
 }

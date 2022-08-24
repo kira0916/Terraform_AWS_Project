@@ -19,7 +19,7 @@ make
 
 cat > /var/www/html/health.html << EOF1
 <html><body><h1>
-HealthCheck-AWS-Server-2
+HealthCheck-AWS-Server-1
 </h1></body></html>
 EOF1
 
@@ -28,28 +28,22 @@ cp mod_jk.so /usr/lib64/httpd/modules/mod_jk.so
 chmod 755 /usr/lib64/httpd/modules/mod_jk.so 
 
 
-sed -i '57 i LoadModule jk_module /usr/lib64/httpd/modules/mod_jk.so' /etc/httpd/conf/httpd.conf
-sed -i '58 i <IfModule jk_module>' /etc/httpd/conf/httpd.conf
-sed -i '59 i JkWorkersFile /etc/httpd/conf/workers.properties' /etc/httpd/conf/httpd.conf
-sed -i '60 i JkLogFile /var/log/httpd/mod_jk.log' /etc/httpd/conf/httpd.conf
-sed -i '61 i JkLogLevel info' /etc/httpd/conf/httpd.conf
-sed -i '62 i JkLogStampFormat "[%a %b $d %H:%M:%S %Y]"' /etc/httpd/conf/httpd.conf
-sed -i '63 i JkMount /*.* worker1' /etc/httpd/conf/httpd.conf
-sed -i '64 i SetEnvIf Request_URI "health\.+html$" html_filter_flag=1' /etc/httpd/conf/httpd.conf
-sed -i '65 i SetEnvIf html_filter_flag 1 no-jk' /etc/httpd/conf/httpd.conf
-sed -i '66 i </IfModule>' /etc/httpd/conf/httpd.conf
-cat >> /etc/httpd/conf/workers.properties << EOF2
+sed -i '357 i ###New Configuration' /etc/httpd/conf/httpd.conf
+sed -i '358 i <VirtualHost *:80>' /etc/httpd/conf/httpd.conf
+sed -i '359 i     ProxyRequests Off' /etc/httpd/conf/httpd.conf
+sed -i '360 i     ProxyPreserveHost On' /etc/httpd/conf/httpd.conf
+sed -i '361 i     <Proxy *>' /etc/httpd/conf/httpd.conf
+sed -i '362 i         Order deny,allow' /etc/httpd/conf/httpd.conf
+sed -i '363 i         Allow from all' /etc/httpd/conf/httpd.conf
+sed -i '364 i     </Proxy>' /etc/httpd/conf/httpd.conf
+sed -i '365 i    ProxyPass / http://${aws_alb.company_n.dns_name}:8080/ disablereuse=on' /etc/httpd/conf/httpd.conf
+sed -i '366 i    ProxyPassReverse / http://${aws_alb.company_n.dns_name}:8080/' /etc/httpd/conf/httpd.conf
+sed -i '367 i </VirtualHost>' /etc/httpd/conf/httpd.conf
 
-worker.list=worker1
-worker.worker1.type=ajp13
-worker.worker1.host=${aws_lb.company_n.dns_name}
-worker.worker1.port=8009
-worker.worker1.socket_timeout=10
-EOF2
 
 systemctl enable httpd
 systemctl start httpd
-  
+   
 EOF
     tags = {
       "Name" = "WEBC"

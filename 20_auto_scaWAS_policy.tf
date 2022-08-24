@@ -8,7 +8,7 @@ resource "aws_autoscaling_policy" "company_auto_WEB_policy" {
       predefined_metric_type = "ASGAverageCPUUtilization"
     }
 
-    target_value = 40.0
+    target_value = 30.0
   }
 }
 
@@ -22,7 +22,7 @@ resource "aws_autoscaling_policy" "company_auto_WAS_policy" {
       predefined_metric_type = "ASGAverageCPUUtilization"
     }
 
-    target_value = 40.0
+    target_value = 30.0
   }
 
 }
