@@ -10,6 +10,6 @@ resource "aws_launch_configuration" "company_autowas" {
                     sudo su -
                     docker swarm init
                     docker pull heeyoonchai/tomcat:1
-                    docker service create --name tomcat -p 8009:8009 --dns=8.8.8.8 --replicas 2 heeyoonchai/tomcat:1
+                    docker service create --name tomcat -p 8009:8009 --dns=8.8.8.8 --replicas 2 heeyoonchai/tomcat:2
                     EOF
 }
