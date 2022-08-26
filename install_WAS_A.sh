@@ -19,5 +19,5 @@ git init
 git add *
 git commit -m "1"
 git branch -M main
-git push --set-upstream https://x1nyub:@github.com/x1nyub/NodeToken2.git main
+git push --set-upstream https://x1nyub:/x1nyub/NodeToken2.git main
 docker pull heeyoonchai/tom:5
