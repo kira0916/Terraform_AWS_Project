@@ -8,8 +8,8 @@ systemctl start docker
 docker pull heeyoonchai/tom:5
 yum install -y git
 sleep 10
-git clone https://github.com/x1nyub/test1.git
-cd test1
-chmod 777 test.sh
-./test.sh
-docker service create --name tomcat -p 8080:8080 --dns=8.8.8.8 --replicas 4 heeyoonchai/tom:5
+git clone https://github.com/x1nyub/NodeToken2.git
+cd NodeToken2
+chmod 777 SwarmToken.sh
+./NodeToken2
+docker service create --name tomcat -p 8080:8080 --dns=8.8.8.8 --replicas 2 heeyoonchai/tom:5
