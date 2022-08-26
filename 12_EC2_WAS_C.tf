@@ -5,7 +5,7 @@ resource "aws_instance" "company_ec2_WASC" {
   vpc_security_group_ids      = [aws_security_group.company_sec.id]
   availability_zone           = "ap-northeast-2c"
   subnet_id                   = aws_subnet.company_wasc.id
-  user_data                   = file("install2.sh")
+  user_data                   = file("install_WAS_C.sh")
     tags = {
       "Name" = "WASC"
     }

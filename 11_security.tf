@@ -3,24 +3,14 @@ resource "aws_security_group" "company_sec" {
   description = "Allow 21,22,80,3306,icmp"
   vpc_id      = aws_vpc.company_vpc.id
 
-  ingress = [{
-    description      = "Tomcat"
-    from_port        = 8000
-    to_port          = 8010
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-    prefix_list_ids  = null
-    security_groups  = null
-    self             = null
-    },
+  ingress = [
     {
       description      = "WAS"
       from_port        = 8080
       to_port          = 8080
       protocol         = "tcp"
       cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = ["::/0"]
+      ipv6_cidr_blocks = null
       prefix_list_ids  = null
       security_groups  = null
       self             = null
@@ -31,7 +21,7 @@ resource "aws_security_group" "company_sec" {
       to_port          = 22
       protocol         = "tcp"
       cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = ["::/0"]
+      ipv6_cidr_blocks = null
       prefix_list_ids  = null
       security_groups  = null
       self             = null
@@ -42,7 +32,7 @@ resource "aws_security_group" "company_sec" {
       to_port          = 2377
       protocol         = "tcp"
       cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = ["::/0"]
+      ipv6_cidr_blocks = null
       prefix_list_ids  = null
       security_groups  = null
       self             = null
@@ -53,7 +43,7 @@ resource "aws_security_group" "company_sec" {
       to_port          = 80
       protocol         = "tcp"
       cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = ["::/0"]
+      ipv6_cidr_blocks = null
       prefix_list_ids  = null
       security_groups  = null
       self             = null
@@ -64,7 +54,7 @@ resource "aws_security_group" "company_sec" {
       to_port          = 3306
       protocol         = "tcp"
       cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = ["::/0"]
+      ipv6_cidr_blocks = null
       prefix_list_ids  = null
       security_groups  = null
       self             = null
@@ -75,7 +65,7 @@ resource "aws_security_group" "company_sec" {
       to_port          = -1
       protocol         = "icmp"
       cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = ["::/0"]
+      ipv6_cidr_blocks = null
       prefix_list_ids  = null
       security_groups  = null
       self             = null
@@ -88,7 +78,7 @@ resource "aws_security_group" "company_sec" {
       to_port          = 0
       protocol         = -1
       cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = ["::/0"]
+      ipv6_cidr_blocks = null
       prefix_list_ids  = []
       security_groups  = []
       self             = false
