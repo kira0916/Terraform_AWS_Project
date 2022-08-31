@@ -34,8 +34,9 @@ sed -i '368 i </VirtualHost>' /etc/httpd/conf/httpd.conf
 
 systemctl enable httpd
 systemctl start httpd
-  
+
 EOF
+
     tags = {
       "Name" = "WEBA"
     }

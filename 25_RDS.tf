@@ -14,10 +14,10 @@ resource "aws_db_instance" "company_mydb" {
     username = "root"
     password = "It1234567!"
     parameter_group_name = "korea"
-    availability_zone = "ap-northeast-2a"
     db_subnet_group_name = aws_db_subnet_group.company_dbsg.id
     vpc_security_group_ids = [aws_security_group.company_sec.id]
     skip_final_snapshot = true
+    multi_az = true
     tags = {
         "Name" = "company-db"
     }
